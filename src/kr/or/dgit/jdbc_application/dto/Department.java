@@ -5,9 +5,7 @@ public class Department {
 	private String deptName;
 	private int floor;
 	
-	public Department() {
-		// TODO Auto-generated constructor stub
-	}
+	public Department() {}
 	
 	public Department(int deptNo) {
 		this.deptNo = deptNo;
