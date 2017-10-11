@@ -4,13 +4,17 @@ public class Title {
 	private int titleNo;
 	private String titleName;
 
-	public Title() {
-		// TODO Auto-generated constructor stub
-	}
+	public Title() {}
 
 	public Title(int titleNo, String titleName) {
 		this.titleNo = titleNo;
 		this.titleName = titleName;
+	}
+
+	
+	
+	public Title(int titleNo) {
+		this.titleNo = titleNo;
 	}
 
 	public int getTitleNo() {

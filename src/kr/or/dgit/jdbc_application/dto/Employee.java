@@ -20,6 +20,11 @@ public class Employee {
 		this.salary = salary;
 		this.dno = dno;
 	}
+	
+
+	public Employee(int empNo) {
+		this.empNo = empNo;
+	}
 
 	public int getEmpNo() {
 		return empNo;

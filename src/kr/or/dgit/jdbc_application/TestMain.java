@@ -2,13 +2,16 @@ package kr.or.dgit.jdbc_application;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import kr.or.dgit.jdbc_application.dao.DepartmentDao;
+import kr.or.dgit.jdbc_application.dao.EmployeeDao;
 import kr.or.dgit.jdbc_application.dao.TitleDao;
 import kr.or.dgit.jdbc_application.dto.Department;
+import kr.or.dgit.jdbc_application.dto.Employee;
 import kr.or.dgit.jdbc_application.dto.Title;
 import kr.or.dgit.jdbc_application.jdbc.DBCon;
 import kr.or.dgit.jdbc_application.jdbc.JdbcUtil;
@@ -28,7 +31,85 @@ public class TestMain {
 
 	private static void testEmployeeDao() {
 		
+		Employee emp = new Employee(2017, "서현진", new Title(1), new Employee(4377),3000000,new Department(1));
 		
+		testInsert(emp);
+		testListAll(emp);
+		
+	
+		emp.setTitle(new Title(2));
+		testUpdate(emp);
+		testEmpNo(emp);
+		testListAll(emp);
+		
+		testDelete(emp);
+		testListAll(emp);
+		
+	}
+
+	private static void testEmpNo(Employee emp) {
+		try {
+			Employee searchEmp = EmployeeDao.getInstance().selectItemByNo(emp);
+			System.out.println(searchEmp);
+		} catch (SQLException e) {
+			System.err.printf("%s - %s%n", e.getErrorCode(), e.getMessage());
+			JOptionPane.showMessageDialog(null, "검색 실패");
+			e.printStackTrace();
+		}
+	}
+
+	private static void testDelete(Employee emp) {
+		try {
+			EmployeeDao.getInstance().deleteItem(emp);
+			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+		} catch (SQLException e) {
+			System.err.printf("%s - %s%n", e.getErrorCode(), e.getMessage());
+			JOptionPane.showMessageDialog(null, "삭제 실패");
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	private static void testUpdate(Employee emp) {
+		
+		try {
+			EmployeeDao.getInstance().updateItem(emp);
+			JOptionPane.showMessageDialog(null, "갱신되었습니다.");
+		} catch (SQLException e) {
+			System.err.printf("%s - %s%n", e.getErrorCode(), e.getMessage());
+			JOptionPane.showMessageDialog(null, "갱신 실패");
+			e.printStackTrace();
+		}
+		
+	}
+
+	private static void testListAll(Employee emp) {
+		try {
+			List<Employee> lists = EmployeeDao.getInstance().selectItemByAll();
+			for(Employee e:lists){
+				System.out.println(e);
+						
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	private static void testInsert(Employee emp) {
+		try {
+			EmployeeDao.getInstance().insertItem(emp);
+			JOptionPane.showMessageDialog(null, "추가하였습니다.");
+		} catch (SQLException e) {
+			System.err.printf("%s - %s%n", e.getErrorCode(), e.getMessage());
+			if(e.getErrorCode()==1062){
+				JOptionPane.showMessageDialog(null, "삽입 실패");
+			}
+			e.printStackTrace();
+		}
 	}
 
 	private static void testTitleDao() {
