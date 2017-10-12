@@ -42,4 +42,8 @@ public class TextFieldComponent extends JPanel {
 			throw new Exception("공백존재");
 		}
 	}
+	
+	public void setEnable(boolean isEnable) {
+		textField.setEnabled(isEnable);		
+	}
 }

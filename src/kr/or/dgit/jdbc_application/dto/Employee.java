@@ -25,7 +25,7 @@ public class Employee {
 	public Employee(int empNo) {
 		this.empNo = empNo;
 	}
-
+	
 	public int getEmpNo() {
 		return empNo;
 	}
@@ -73,11 +73,10 @@ public class Employee {
 	public void setDno(Department dno) {
 		this.dno = dno;
 	}
-
+	
 	@Override
 	public String toString() {
-		return String.format("%s %s %s %s %s %s", empNo, empName,
-				title, manager, salary, dno);
+		return String.format("%s(%s)", empName, empNo);
 	}
 	
 	

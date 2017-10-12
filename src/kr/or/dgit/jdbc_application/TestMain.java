@@ -16,7 +16,6 @@ import javax.swing.WindowConstants;
 import kr.or.dgit.jdbc_application.common.TextFieldComponent;
 import kr.or.dgit.jdbc_application.content.DepartmentContent;
 import kr.or.dgit.jdbc_application.content.EmployeeComponent;
-import kr.or.dgit.jdbc_application.content.TitleContent;
 import kr.or.dgit.jdbc_application.dao.DepartmentDao;
 import kr.or.dgit.jdbc_application.dao.EmployeeDao;
 import kr.or.dgit.jdbc_application.dao.TitleDao;
@@ -25,6 +24,8 @@ import kr.or.dgit.jdbc_application.dto.Employee;
 import kr.or.dgit.jdbc_application.dto.Title;
 import kr.or.dgit.jdbc_application.jdbc.DBCon;
 import kr.or.dgit.jdbc_application.jdbc.JdbcUtil;
+
+
 
 public class TestMain {
 
@@ -43,26 +44,30 @@ public class TestMain {
 		//testDepartmentComponent();
 		
 		EmployeeComponent tfc = new EmployeeComponent();
-		
-		tfc.setContent(new Employee(1, "서현진", new Title(2), new Employee(2), 3000000, new Department(2)));
+		tfc.setContent(new Employee(3, "홍길동", new Title(1), new Employee(2), 1000000, new Department(1)));
 		
 		JButton btn = new JButton("테스트");
 		btn.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					tfc.isEmptyCheck();
-					Employee e1= tfc.getContent();
-					JOptionPane.showMessageDialog(null, e1);
+					Employee dept = tfc.getContent();
+					StringBuilder sb = new StringBuilder();
+					sb.append(dept.getEmpNo());
+					sb.append(dept.getEmpName());
+					sb.append(dept.getTitle());
+					sb.append(dept.getManager());
+					sb.append(dept.getSalary());
+					sb.append(dept.getDno());
+					JOptionPane.showMessageDialog(null, sb);
 				} catch (Exception e1) {
+					e1.printStackTrace();
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 			}
 		});
-		
-		
-		testContent(tfc,btn);
+		testContent(tfc, btn);
 	
 	}
 
