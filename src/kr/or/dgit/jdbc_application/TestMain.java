@@ -15,6 +15,8 @@ import javax.swing.WindowConstants;
 
 import kr.or.dgit.jdbc_application.common.TextFieldComponent;
 import kr.or.dgit.jdbc_application.content.DepartmentContent;
+import kr.or.dgit.jdbc_application.content.EmployeeComponent;
+import kr.or.dgit.jdbc_application.content.TitleContent;
 import kr.or.dgit.jdbc_application.dao.DepartmentDao;
 import kr.or.dgit.jdbc_application.dao.EmployeeDao;
 import kr.or.dgit.jdbc_application.dao.TitleDao;
@@ -38,6 +40,33 @@ public class TestMain {
 		
 		//testTextFieldComponent();
 		
+		//testDepartmentComponent();
+		
+		EmployeeComponent tfc = new EmployeeComponent();
+		
+		tfc.setContent(new Employee(1, "서현진", new Title(2), new Employee(2), 3000000, new Department(2)));
+		
+		JButton btn = new JButton("테스트");
+		btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					tfc.isEmptyCheck();
+					Employee e1= tfc.getContent();
+					JOptionPane.showMessageDialog(null, e1);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
+		});
+		
+		
+		testContent(tfc,btn);
+	
+	}
+
+	private static void testDepartmentComponent() {
 		DepartmentContent tfc = new DepartmentContent();
 		
 		tfc.setContent(new Department(1, "개발", 10));
@@ -60,8 +89,6 @@ public class TestMain {
 		
 		
 		testContent(tfc,btn);
-		
-	
 	}
 
 	private static void testTextFieldComponent() {

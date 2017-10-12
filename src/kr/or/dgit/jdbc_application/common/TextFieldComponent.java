@@ -1,8 +1,9 @@
 package kr.or.dgit.jdbc_application.common;
 
-import javax.swing.JPanel;
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
