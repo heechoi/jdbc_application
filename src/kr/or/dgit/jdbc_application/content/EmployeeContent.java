@@ -13,7 +13,7 @@ import kr.or.dgit.jdbc_application.dto.Employee;
 import kr.or.dgit.jdbc_application.dto.Title;
 
 @SuppressWarnings("serial")
-public class EmployeeComponent extends JPanel {
+public class EmployeeContent extends JPanel {
 
 	private TextFieldComponent pEmpNo;
 	private TextFieldComponent pEmpName;
@@ -22,7 +22,7 @@ public class EmployeeComponent extends JPanel {
 	private ComboBoxComponent<Department> pDno;
 	private ComboBoxComponent<Employee> pManager;
 
-	public EmployeeComponent() {
+	public EmployeeContent() {
 		setLayout(new GridLayout(0, 1, 0, 10));
 		
 		pEmpNo = new TextFieldComponent("사원번호");
@@ -73,7 +73,7 @@ public class EmployeeComponent extends JPanel {
 		int empNo = Integer.parseInt(pEmpNo.getTextValue());
 		String empName = pEmpName.getTextValue();
 		Title title = pTitle.getSelectedItem();
-		Employee manager = new Employee(empNo);
+		Employee manager = pManager.getSelectedItem();
 		int salary = pSalary.getSpinValue();
 		Department dno = pDno.getSelectedItem();
 		return new Employee(empNo, empName, title, manager, salary, dno);

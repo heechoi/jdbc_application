@@ -7,6 +7,10 @@ public class Department {
 	
 	public Department() {}
 	
+	public Department(String deptName) {
+		this.deptName = deptName;
+	}
+
 	public Department(int deptNo) {
 		this.deptNo = deptNo;
 	}

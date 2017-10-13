@@ -10,9 +10,14 @@ public class Title {
 		this.titleNo = titleNo;
 		this.titleName = titleName;
 	}
+	
+	
+	
+	
+	public Title(String titleName) {
+		this.titleName = titleName;
+	}
 
-	
-	
 	public Title(int titleNo) {
 		this.titleNo = titleNo;
 	}

@@ -21,6 +21,10 @@ public class Employee {
 		this.dno = dno;
 	}
 	
+	
+	public Employee(String empName) {
+		this.empName = empName;
+	}
 
 	public Employee(int empNo) {
 		this.empNo = empNo;
@@ -76,7 +80,11 @@ public class Employee {
 	
 	@Override
 	public String toString() {
+
 		return String.format("%s(%s)", empName, empNo);
+
+		//return String.format("%s(%s)", empName, empNo);
+
 	}
 	
 	

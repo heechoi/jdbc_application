@@ -15,7 +15,7 @@ import javax.swing.WindowConstants;
 
 import kr.or.dgit.jdbc_application.common.TextFieldComponent;
 import kr.or.dgit.jdbc_application.content.DepartmentContent;
-import kr.or.dgit.jdbc_application.content.EmployeeComponent;
+import kr.or.dgit.jdbc_application.content.EmployeeContent;
 import kr.or.dgit.jdbc_application.dao.DepartmentDao;
 import kr.or.dgit.jdbc_application.dao.EmployeeDao;
 import kr.or.dgit.jdbc_application.dao.TitleDao;
@@ -43,7 +43,7 @@ public class TestMain {
 		
 		//testDepartmentComponent();
 		
-		EmployeeComponent tfc = new EmployeeComponent();
+		EmployeeContent tfc = new EmployeeContent();
 		tfc.setContent(new Employee(3, "홍길동", new Title(1), new Employee(2), 1000000, new Department(1)));
 		
 		JButton btn = new JButton("테스트");
