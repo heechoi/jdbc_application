@@ -1,19 +1,21 @@
 package kr.or.dgit.jdbc_application.list;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.util.Vector;
+import java.util.List;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.jdbc_application.dto.Department;
+import kr.or.dgit.jdbc_application.service.DepartmentService;
 
 public class ListDepartment extends AbstractList {
+	
+	private DepartmentService service;
+	
+	public ListDepartment(DepartmentService service) {
+		//super();생략
+		this.service = service;
+	}
+
 	/*
 	 * private JTable table; //공통의 것들을 추상화 클래스로 바꿈
 	 * 
@@ -70,7 +72,14 @@ public class ListDepartment extends AbstractList {
 
 	@Override
 	protected Object[][] getData() {
-		Object[][] datas = { { 1, "개발", 10 }, { 2, "인사", 20 }, { 3, "마케팅", 30 } };
+		List<Department> lists = service.selectDepartmentByAll();
+		//Object[][] datas = { { 1, "개발", 10 }, { 2, "인사", 20 }, { 3, "마케팅", 30 } };
+		Object[][] datas = new Object[lists.size()][];
+		for(int i = 0 ; i<lists.size();i++){
+			datas[i]  = lists.get(i).toArray();
+		}
+			
+		
 		return datas;
 	}
 
@@ -81,10 +90,12 @@ public class ListDepartment extends AbstractList {
 		//System.out.println(table.getSelectedRow()); //row를 선택했을때 test해본것  row는 0부터 시작한다. 
 		
 		int deptNo = (int) table.getValueAt(selectedIndex, 0);
-		String deptName = (String) table.getValueAt(selectedIndex, 1);
+	/*	String deptName = (String) table.getValueAt(selectedIndex, 1);
 		int floor = (int) table.getValueAt(selectedIndex, 2);
 		
-		return new Department(deptNo, deptName, floor);
+		return new Department(deptNo, deptName, floor);*/
+		
+		return service.selectDepartmentByNo(new Department(deptNo));
 	}
 
 }

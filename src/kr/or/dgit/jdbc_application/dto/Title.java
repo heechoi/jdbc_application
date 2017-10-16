@@ -13,10 +13,10 @@ public class Title {
 	
 	
 	
-	
+/*	
 	public Title(String titleName) {
 		this.titleName = titleName;
-	}
+	}*/
 
 	public Title(int titleNo) {
 		this.titleNo = titleNo;
@@ -38,9 +38,18 @@ public class Title {
 		this.titleName = titleName;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return String.format("%s(%s)", titleName, titleNo);
 	}
+	*/
+	
+	public Object[] toArray(){
+		return new Object[]{titleNo,titleName};
+	}
 
+	@Override
+	public String toString() {
+		return String.format("%s(%s)", titleName,titleNo);
+	}
 }

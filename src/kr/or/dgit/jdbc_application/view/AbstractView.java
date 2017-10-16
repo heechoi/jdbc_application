@@ -17,6 +17,8 @@ public abstract class AbstractView extends JFrame {
 	private JPanel contentPane;
 
 	public AbstractView(String title) {
+		createService();
+		
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,6 +48,10 @@ public abstract class AbstractView extends JFrame {
 		AbstractList pList = createList();
 		contentPane.add(pList, BorderLayout.CENTER);
 	}
+
+	protected abstract void createService();//service가 각각 다르기 때문에 추상화로
+		
+	
 
 	protected abstract AbstractList createList();
 

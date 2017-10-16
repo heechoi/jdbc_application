@@ -22,10 +22,10 @@ public abstract class AbstractList extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		loadData();
+		//loadData(); 외부에서 호출하도록 바꿔주어야한다.
 	}
 
-	private void loadData() {
+	public void loadData() {
 		DefaultTableModel model = new DefaultTableModel(getData(), getColumnNames());
 		table.setModel(model);
 		setAlignWidth();

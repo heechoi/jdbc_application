@@ -24,6 +24,8 @@ import kr.or.dgit.jdbc_application.dto.Employee;
 import kr.or.dgit.jdbc_application.dto.Title;
 import kr.or.dgit.jdbc_application.jdbc.DBCon;
 import kr.or.dgit.jdbc_application.jdbc.JdbcUtil;
+import kr.or.dgit.jdbc_application.service.EmployeeService;
+
 
 
 
@@ -43,7 +45,7 @@ public class TestMain {
 		
 		//testDepartmentComponent();
 		
-		EmployeeContent tfc = new EmployeeContent();
+		EmployeeContent tfc = new EmployeeContent(new EmployeeService());
 		tfc.setContent(new Employee(3, "홍길동", new Title(1), new Employee(2), 1000000, new Department(1)));
 		
 		JButton btn = new JButton("테스트");

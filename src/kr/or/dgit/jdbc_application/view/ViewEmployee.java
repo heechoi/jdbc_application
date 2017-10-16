@@ -5,9 +5,10 @@ import javax.swing.JPanel;
 import kr.or.dgit.jdbc_application.content.EmployeeContent;
 import kr.or.dgit.jdbc_application.list.AbstractList;
 import kr.or.dgit.jdbc_application.list.ListEmployee;
+import kr.or.dgit.jdbc_application.service.EmployeeService;
 
 public class ViewEmployee extends AbstractView {
-
+	private EmployeeService service;
 	private JPanel contentPane;
 //부모에서 생성해주니까 필요없음
 /*	public ViewDepartment() {
@@ -48,14 +49,22 @@ public class ViewEmployee extends AbstractView {
 	
 	@Override
 	protected AbstractList createList() {
-		ListEmployee pList = new ListEmployee();
+	
+		ListEmployee pList = new ListEmployee(service);
+		pList.loadData();
 		return pList;
 	}
 
 	@Override
 	protected JPanel createContent() {
-		EmployeeContent pContent = new EmployeeContent();
+		EmployeeContent pContent = new EmployeeContent(service);
 		return pContent;
+	}
+
+	@Override
+	protected void createService() {
+		service = new EmployeeService();
+		
 	}
 
 }

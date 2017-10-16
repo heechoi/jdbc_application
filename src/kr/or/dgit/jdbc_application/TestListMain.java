@@ -11,6 +11,7 @@ import javax.swing.WindowConstants;
 
 import kr.or.dgit.jdbc_application.list.AbstractList;
 import kr.or.dgit.jdbc_application.list.ListEmployee;
+import kr.or.dgit.jdbc_application.service.EmployeeService;
 
 public class TestListMain {
 
@@ -20,11 +21,12 @@ public class TestListMain {
 		jf.setBounds(10,10,300,450);
 		
 		
-		//AbstractList ld = new ListDepartment();
-		//AbstractList ld = new ListTitle();
+		//AbstractList ld = new ListDepartment(new DepartmentService());
+		//AbstractList ld = new ListTitle(new TitleService());
 		
-		AbstractList ld = new ListEmployee();
 		
+		AbstractList ld = new ListEmployee(new EmployeeService());
+		ld.loadData(); //외부에서 호출을 해주어야한다.
 		//ld.getSelectItem()
 		jf.add(ld);
 		

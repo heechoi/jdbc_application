@@ -6,9 +6,10 @@ import kr.or.dgit.jdbc_application.content.DepartmentContent;
 import kr.or.dgit.jdbc_application.list.AbstractList;
 import kr.or.dgit.jdbc_application.list.ListDepartment;
 import kr.or.dgit.jdbc_application.list.ListTitle;
+import kr.or.dgit.jdbc_application.service.DepartmentService;
 
 public class ViewDepartment extends AbstractView {
-
+	private DepartmentService service;
 	private JPanel contentPane;
 //부모에서 생성해주니까 필요없음
 /*	public ViewDepartment() {
@@ -49,7 +50,9 @@ public class ViewDepartment extends AbstractView {
 	
 	@Override
 	protected AbstractList createList() {
-		ListDepartment pList = new ListDepartment();
+		//DepartmentService ds = new DepartmentService();
+		ListDepartment pList = new ListDepartment(service);
+		pList.loadData();
 		return pList;
 	}
 
@@ -57,6 +60,11 @@ public class ViewDepartment extends AbstractView {
 	protected JPanel createContent() {
 		DepartmentContent pContent = new DepartmentContent();
 		return pContent;
+	}
+
+	@Override
+	protected void createService() {
+		service = new DepartmentService();
 	}
 
 }

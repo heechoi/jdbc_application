@@ -22,9 +22,9 @@ public class Employee {
 	}
 	
 	
-	public Employee(String empName) {
+	/*public Employee(String empName) {
 		this.empName = empName;
-	}
+	}*/
 
 	public Employee(int empNo) {
 		this.empNo = empNo;
@@ -95,5 +95,7 @@ public class Employee {
 				title.getTitleName(), manager.getEmpName(), salary, dno.getDeptName());
 	}*/
 	
-	
+	public Object[] toArray(){
+		return new Object[]{empNo,empName,title,manager,salary,dno};
+	}
 }

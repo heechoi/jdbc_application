@@ -7,9 +7,9 @@ public class Department {
 	
 	public Department() {}
 	
-	public Department(String deptName) {
+/*	public Department(String deptName) {
 		this.deptName = deptName;
-	}
+	}*/
 
 	public Department(int deptNo) {
 		this.deptNo = deptNo;
@@ -70,12 +70,15 @@ public class Department {
 	
 	@Override
 	public String toString() {
-		return String.format("%s(%s층)", deptName, floor);
+		return String.format("%s(%s)",deptName,floor);
 	}
-	/*@Override
+/*	@Override
 	public String toString() {
 		return String.format("Department [deptNo=%s, deptName=%s, floor=%s]", deptNo, deptName, floor);
 	}*/
 	
+	public Object[] toArray(){
+		return new Object[]{deptNo,deptName,floor};
+	}
 	
 }
