@@ -54,11 +54,17 @@ public class EmployeeContent extends JPanel {
 		setManagerModel();
 	}
 	private void setManagerModel() {
-		Vector<Employee> lists = new Vector<>();
+		List<Employee> lists = service.selectEmployeeByAll();
+		Employee ceo = new Employee(4377);
+		if(!lists.contains(ceo)){
+			lists.add(service.selectEmployeeByNo(new Employee(4377)));
+		}
+		Vector<Employee> managers = new Vector<>(lists);
+	/*	Vector<Employee> lists = new Vector<>();
 		lists.add(new Employee(2, "서현진",new Title(1, "사장"),new Employee(1), 2000000, new Department(1)));
-		lists.add(new Employee(1));
+		lists.add(new Employee(1));*/
 		//lists.add(new Employee(1));
-		pManager.setComboBoxModel(lists);				
+		pManager.setComboBoxModel(managers);				
 	}
 	
 	private void setTitleMOdel() {
@@ -69,11 +75,12 @@ public class EmployeeContent extends JPanel {
 		pTitle.setComboBoxModel(titles);		
 	}
 	public void setDeptModel(){
-		Vector<Department> lists = new Vector<>();
-		lists.add(new Department(1, "개발", 10));
+		List<Department> lists = service.selectDepartmentByAll();
+		Vector<Department> depts = new Vector<>(lists);
+	/*	lists.add(new Department(1, "개발", 10));
 		lists.add(new Department(2, "연구", 9));
-		lists.add(new Department(3, "영업", 13));
-		pDno.setComboBoxModel(lists);
+		lists.add(new Department(3, "영업", 13));*/
+		pDno.setComboBoxModel(depts);
 	}
 	public Employee getContent(){
 		int empNo = Integer.parseInt(pEmpNo.getTextValue());
