@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.or.dgit.jdbc_application.dto.Department;
 import kr.or.dgit.jdbc_application.dto.Title;
 import kr.or.dgit.jdbc_application.jdbc.DBCon;
 
@@ -89,6 +90,11 @@ public class TitleDao implements SqlDao<Title> {
 		int titleNo = rs.getInt(1);
 		String titleName = rs.getString(2);
 		return new Title(titleNo, titleName);
+	}
+
+	@Override
+	public List<Title> selectItemByDno(Department dept) throws SQLException {
+		return null;
 	}
 
 }

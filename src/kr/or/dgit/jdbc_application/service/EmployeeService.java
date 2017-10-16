@@ -110,4 +110,14 @@ public class EmployeeService {
 		return null;
 	}
 	
+	public List<Employee> selectEmployeeByDno(Department dept){
+		try {
+			return empDao.selectItemByDno(dept);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
 }

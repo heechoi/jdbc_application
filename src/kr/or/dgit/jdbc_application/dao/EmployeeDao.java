@@ -1,12 +1,11 @@
 package kr.or.dgit.jdbc_application.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import kr.or.dgit.jdbc_application.dto.Department;
 import kr.or.dgit.jdbc_application.dto.Employee;
@@ -110,5 +109,23 @@ public class EmployeeDao implements SqlDao<Employee> {
 	
 		return new Employee(empNo, empName, title, manager, salary, dno);
 	}
+	
+	public List<Employee> selectItemByDno(Department item) throws SQLException {
+		List<Employee> lists = new ArrayList<>();
+		String sql = "select empno,empname,title,manager,salary,dno from employee where dno=?";
+		Connection con = DBCon.getInstance().getConnection();
+		
+		
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setInt(1, item.getDeptNo());
+			try(ResultSet rs= pstmt.executeQuery();){
+				while(rs.next()){
+					lists.add(getEmployee(rs));
+					
+				}
+			}
+		}
 
+		return lists;
+	}
 }

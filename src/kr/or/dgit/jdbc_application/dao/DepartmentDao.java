@@ -133,4 +133,9 @@ public class DepartmentDao implements SqlDao<Department> {
 		return new Department(deptNo, deptName, floor);
 	}
 
+	@Override
+	public List<Department> selectItemByDno(Department dept) throws SQLException {
+		return null;
+	}
+
 }
