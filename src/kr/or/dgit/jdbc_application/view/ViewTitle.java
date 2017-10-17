@@ -1,15 +1,19 @@
 package kr.or.dgit.jdbc_application.view;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JPanel;
 
+import kr.or.dgit.jdbc_application.content.AbstractContent;
 import kr.or.dgit.jdbc_application.content.TitleContent;
+import kr.or.dgit.jdbc_application.dto.Title;
 import kr.or.dgit.jdbc_application.list.AbstractList;
 import kr.or.dgit.jdbc_application.list.ListTitle;
 import kr.or.dgit.jdbc_application.service.TitleService;
 
 public class ViewTitle extends AbstractView {
 	private TitleService service;
-	private JPanel contentPane;
+	//private JPanel contentPane;
 //부모에서 생성해주니까 필요없음
 /*	public ViewDepartment() {
 		setTitle("부서관리");
@@ -41,7 +45,8 @@ public class ViewTitle extends AbstractView {
 		AbstractList pList = createList();
 		contentPane.add(pList, BorderLayout.CENTER);
 	}*/
-	
+	//private TitleContent pContent;
+	//private ListTitle pList;
 	public ViewTitle(String title) {
 		super(title);
 		
@@ -50,20 +55,46 @@ public class ViewTitle extends AbstractView {
 	@Override
 	protected AbstractList createList() {
 		//TitleService ts = new TitleService();
-		ListTitle pList = new ListTitle(service);
+		pList = new ListTitle(service);
 		pList.loadData();
 		return pList;
 	}
 
-	@Override
-	protected JPanel createContent() {
-		TitleContent pContent = new TitleContent();
+	
+	/*protected JPanel createContent() {
+		pContent = new TitleContent();
 		return pContent;
+	}*/
+	@Override
+	protected AbstractContent<Title> createContent() {
+		pContent = new TitleContent();
+		return (AbstractContent<Title>) pContent;
 	}
-
 	@Override
 	protected void createService() {
 		service = new TitleService();
+	}
+
+	@Override
+	protected void insertContent(Object content) {
+		service.insertTitle((Title)content);
+		
+	}
+
+	@Override
+	protected void deleteContent(Object item) {
+		service.deleteTitle((Title)item);
+		
+	}
+
+	@Override
+	protected void updateContent(Object content) {
+		service.upadteTitle((Title)content);
+	}
+
+	@Override
+	protected Object searchNo(int No) {
+		return service.selectTitleByNo(new Title(No));
 	}
 
 }

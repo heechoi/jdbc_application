@@ -1,16 +1,21 @@
 package kr.or.dgit.jdbc_application.view;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JPanel;
 
+import kr.or.dgit.jdbc_application.content.AbstractContent;
 import kr.or.dgit.jdbc_application.content.DepartmentContent;
+import kr.or.dgit.jdbc_application.dto.Department;
 import kr.or.dgit.jdbc_application.list.AbstractList;
 import kr.or.dgit.jdbc_application.list.ListDepartment;
 import kr.or.dgit.jdbc_application.list.ListTitle;
 import kr.or.dgit.jdbc_application.service.DepartmentService;
 
-public class ViewDepartment extends AbstractView {
+public class ViewDepartment extends AbstractView{
 	private DepartmentService service;
-	private JPanel contentPane;
+	private AbstractList pList;
+	//private JPanel contentPane;
 //부모에서 생성해주니까 필요없음
 /*	public ViewDepartment() {
 		setTitle("부서관리");
@@ -42,6 +47,7 @@ public class ViewDepartment extends AbstractView {
 		AbstractList pList = createList();
 		contentPane.add(pList, BorderLayout.CENTER);
 	}*/
+	//private DepartmentContent pContent;
 	
 	public ViewDepartment(String title) {
 		super(title);
@@ -51,20 +57,46 @@ public class ViewDepartment extends AbstractView {
 	@Override
 	protected AbstractList createList() {
 		//DepartmentService ds = new DepartmentService();
-		ListDepartment pList = new ListDepartment(service);
+		pList = new ListDepartment(service);
 		pList.loadData();
 		return pList;
 	}
 
 	@Override
-	protected JPanel createContent() {
-		DepartmentContent pContent = new DepartmentContent();
-		return pContent;
+	protected AbstractContent<Department> createContent() {
+		pContent = new DepartmentContent();
+		return (AbstractContent<Department>) pContent;
 	}
 
 	@Override
 	protected void createService() {
 		service = new DepartmentService();
 	}
+
+	@Override
+	protected void insertContent(Object content) {
+		service.insertDepartment((Department)content);
+		
+	}
+
+	@Override
+	protected void deleteContent(Object item) {
+		service.deleteDepartment((Department)item);
+		
+	}
+
+	@Override
+	protected void updateContent(Object content) {
+	
+		service.updateDepartment((Department)content);
+		
+	}
+
+	@Override
+	protected Object searchNo(int No) {
+		return service.selectDepartmentByNo(new Department(No));
+	}
+
+
 
 }

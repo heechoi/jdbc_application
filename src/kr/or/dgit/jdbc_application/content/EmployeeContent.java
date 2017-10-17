@@ -17,7 +17,7 @@ import kr.or.dgit.jdbc_application.dto.Title;
 import kr.or.dgit.jdbc_application.service.EmployeeService;
 
 @SuppressWarnings("serial")
-public class EmployeeContent extends JPanel implements ActionListener{
+public class EmployeeContent extends AbstractContent<Employee> implements ActionListener{
 
 	private TextFieldComponent pEmpNo;
 	private TextFieldComponent pEmpName;
@@ -39,8 +39,9 @@ public class EmployeeContent extends JPanel implements ActionListener{
 		pEmpName = new TextFieldComponent("사원명");
 		add(pEmpName);
 		
-		pTitle = new ComboBoxComponent<>("직책");
-		add(pTitle);
+		pDno = new ComboBoxComponent<>("부서");
+		pDno.getCombo().addActionListener(this);
+		add(pDno);
 		
 		pManager = new ComboBoxComponent<>("관리자");
 	
@@ -49,9 +50,8 @@ public class EmployeeContent extends JPanel implements ActionListener{
 		pSalary = new SpinnerComponent("급여");
 		add(pSalary);
 		
-		pDno = new ComboBoxComponent<>("부서");
-		pDno.getCombo().addActionListener(this);
-		add(pDno);
+		pTitle = new ComboBoxComponent<>("직책");
+		add(pTitle);
 		
 		setDeptModel();
 		setTitleMOdel();
@@ -106,6 +106,8 @@ public class EmployeeContent extends JPanel implements ActionListener{
 		lists.add(new Department(3, "영업", 13));*/
 		pDno.setComboBoxModel(depts);
 	}
+	
+	@Override
 	public Employee getContent(){
 		int empNo = Integer.parseInt(pEmpNo.getTextValue());
 		String empName = pEmpName.getTextValue();
@@ -116,6 +118,7 @@ public class EmployeeContent extends JPanel implements ActionListener{
 		return new Employee(empNo, empName, title, manager, salary, dno);
 	}
 	
+	@Override
 	public void setContent(Employee employee){
 		pEmpNo.setTextValue(employee.getEmpNo()+"");
 		pEmpName.setTextValue(employee.getEmpName());
@@ -124,7 +127,7 @@ public class EmployeeContent extends JPanel implements ActionListener{
 		pSalary.setSpinValue(employee.getSalary());
 		pTitle.setSelectedItem(employee.getTitle());
 	}
-	
+	@Override
 	public void isEmptyCheck() throws Exception {
 		pEmpNo.isEmptyCheck();
 		pEmpName.isEmptyCheck();
@@ -138,5 +141,21 @@ public class EmployeeContent extends JPanel implements ActionListener{
 			setManagerModel();
 		}
 	}
+	@Override
+	public void clear(){
+		pEmpNo.setTextValue("");
+		pEmpName.setTextValue("");
+		pDno.setSelectedIndex(0);
+		pManager.setSelectedIndex(0);
+		pSalary.setSpinValue(1500000);
+		pTitle.setSelectedIndex(0);
+	}
+
+	@Override
+	public void showContent(Object content) {
 	
+		setContent((Employee)content);
+	}
+
+
 }

@@ -3,6 +3,7 @@ package kr.or.dgit.jdbc_application.list;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -13,6 +14,7 @@ import javax.swing.table.TableColumnModel;
 public abstract class AbstractList extends JPanel {
 	//private JTable table;
 	protected JTable table;	
+	
 	public AbstractList() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -24,7 +26,11 @@ public abstract class AbstractList extends JPanel {
 		
 		//loadData(); 외부에서 호출하도록 바꿔주어야한다.
 	}
-
+	
+	public void setPopupMenu(JPopupMenu menu){
+		table.setComponentPopupMenu(menu);
+	}
+	
 	public void loadData() {
 		DefaultTableModel model = new DefaultTableModel(getData(), getColumnNames());
 		table.setModel(model);
